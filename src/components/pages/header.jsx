@@ -12,21 +12,25 @@ const Navbar = () => {
   // Active class with glassy button style, padding, and transition
   const getActiveClass = (path) => {
     return location.pathname === path
-      ? "text-stone-200 bg-stone-800/50 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-stone-700/50 transition-all duration-300 ease-in-out" // Glassy active style with padding and transition
-      : "text-stone-500 transition-all duration-300 ease-in-out"; // Inactive state style with transition
+      ? "text-stone-200 bg-stone-800/50 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-stone-700/50 transition-all duration-300 ease-in-out"
+      : "text-stone-500 transition-all duration-300 ease-in-out";
   };
 
+  // Define navigation items once for consistency
+  const navItems = [
+    { name: "Home", to: "/", icon: <Home size={18} /> },
+    { name: "Skills", to: "/skills", icon: <Lightbulb size={18} /> },
+    { name: "Projects", to: "/projects", icon: <Code size={18} /> },
+    { name: "Contact", to: "/contact", icon: <Mail size={18} /> },
+  ];
+
   return (
-    <nav className="relative mx-auto w-[90%] rounded-3xl">
+    <nav className="relative mx-auto w-full border-amber-400 rounded-3xl">
       <div className="mx-auto max-w-6xl px-6 py-3 transition-all duration-300 lg:px-12">
         <div className="flex items-center justify-between rounded-[25px] border border-stone-700 bg-stone-900 px-6 py-3">
           {/* Logo */}
           <div className="flex items-center space-x-4">
-            <Link
-              aria-label="home"
-              className="flex items-center space-x-2"
-              to="/"
-            >
+            <Link aria-label="home" className="flex items-center space-x-2" to="/">
               <img
                 className="w-10 rounded-full drop-shadow-lg transition-all duration-300 hover:scale-110"
                 src="https://i.postimg.cc/fySckvqz/image.png"
@@ -38,12 +42,7 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden lg:block">
             <ul className="flex gap-10 text-sm font-semibold tracking-wide">
-              {[
-                { name: "Home", to: "/", icon: <Home size={18} /> },
-                { name: "Skills", to: "/skills", icon: <Lightbulb size={18} /> },
-                { name: "Projects", to: "/projects", icon: <Code size={18} /> },
-                { name: "Contact", to: "/contact", icon: <Mail size={18} /> },
-              ].map((item, index) => (
+              {navItems.map((item, index) => (
                 <li key={index} className="relative flex items-center gap-2">
                   <Link
                     to={item.to}
@@ -59,7 +58,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* GitHub Button */}
+          {/* GitHub Button for Desktop */}
           <div className="hidden lg:flex gap-6">
             <Headerbtn />
           </div>
@@ -99,17 +98,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-stone-900 shadow-md animate-slide-down">
+        <div className="lg:hidden bg-stone-900 w-full shadow-md animate-slide-down">
           <ul className="flex flex-col gap-4 p-4 text-sm text-stone-500">
-            {[
-              { name: "Home", to: "/" },
-              { name: "Skills", to: "/skills" },
-              { name: "Contact", to: "/contact" },
-              { name: "GitHub", to: "/github" },
-              { name: "Sign Up", to: "/signup" },
-            ].map((item, index) => (
+            {navItems.map((item, index) => (
               <li key={index}>
                 <Link
+                  onClick={toggleMenu}
                   className={`block px-4 py-2 rounded-xl text-center ${getActiveClass(
                     item.to
                   )} hover:bg-stone-800 hover:text-stone-200`}
@@ -119,6 +113,10 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            {/* GitHub Button for Mobile */}
+            <li>
+              <Headerbtn />
+            </li>
           </ul>
         </div>
       )}

@@ -1,8 +1,16 @@
+import { div } from "motion/react-client";
 import React from "react";
 
+
+
 export default function HeroSection() {
+
   return (
-    <div className="relative ">
+    <>
+      
+
+    
+       <div className="relative " >
       <div className="absolute inset-0 opacity-50"></div>
       <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-6">
         <div>
@@ -21,5 +29,8 @@ export default function HeroSection() {
         </div>
       </div>
     </div>
+    
+    </>
+  
   );
 }
