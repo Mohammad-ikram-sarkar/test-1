@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Headerbtn from "../ui/Headerbtn";
 import { Home, Lightbulb, Code, Mail } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/image.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="relative mx-auto w-full border-amber-400 rounded-3xl">
+    <nav className="relative mx-auto min-lg:w-[100vh]  w-[98%] rounded-3xl">
       <div className="mx-auto max-w-6xl px-6 py-3 transition-all duration-300 lg:px-12">
         <div className="flex items-center justify-between rounded-[25px] border border-stone-700 bg-stone-900 px-6 py-3">
           {/* Logo */}
@@ -33,7 +34,7 @@ const Navbar = () => {
             <Link aria-label="home" className="flex items-center space-x-2" to="/">
               <img
                 className="w-10 rounded-full drop-shadow-lg transition-all duration-300 hover:scale-110"
-                src="https://i.postimg.cc/fySckvqz/image.png"
+                src= {logo}
                 alt="Logo"
               />
             </Link>
@@ -114,7 +115,7 @@ const Navbar = () => {
               </li>
             ))}
             {/* GitHub Button for Mobile */}
-            <li>
+            <li className="max-lg:hidden">
               <Headerbtn />
             </li>
           </ul>
